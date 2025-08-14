@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os/exec"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -31,9 +32,20 @@ func ret(output string) {
 	}
 	defer resp.Body.Close()
 }
-func run(cmd2 string) {
+func run(command string) {
+	var cmd *exec.Cmd
 
-	cmd := exec.Command("bash", "-c", cmd2)
+	switch runtime.GOOS {
+
+	case "windows":
+		{
+			cmd = exec.Command("cmd", "/C", command)
+		}
+	default:
+		{
+			cmd = exec.Command("bash", "-c", command)
+		}
+	}
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {
