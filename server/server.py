@@ -25,5 +25,5 @@ if __name__== '__main__':
         print("Server started")
         ser.serve_forever()
     except:
-        print("stopping")
+        print("Stopping")
         ser.server_close()
