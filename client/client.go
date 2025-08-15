@@ -20,11 +20,11 @@ func sendinfo() {
 
 	case "windows":
 		{
-			formData.Set("info", "Shell: CMD")
+			formData.Set("info", "Shell: CMD \nOS: Windows")
 		}
 	default:
 		{
-			formData.Set("info", "Shell: SH")
+			formData.Set("info", "Shell: SH \nOS: Linux Based Distro")
 		}
 	}
 
