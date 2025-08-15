@@ -19,10 +19,14 @@ class ServerHandler(BaseHTTPRequestHandler):
         data = parse_qs(self.rfile.read(length).decode())
         if "return" in data:
             print(data["return"][0])
+        if "info" in data:
+            print("Connection recevied!")
+            print(data["info"][0])
 if __name__== '__main__':
     ser = HTTPServer((IP,PORT),ServerHandler)
     try:
         print("Server started")
+        print("Waiting for connections...")
         ser.serve_forever()
     except:
         print("Stopping")
