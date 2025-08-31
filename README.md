@@ -8,4 +8,4 @@ A reverse shell over http
 # Custom client
 - The client should send a POST to the server with json (client should also check for device details and fill in the SHELL and OS)
 - `"info":"Shell: {SHELL} \n OS: {OS}"`
-- The client should have a loop sending a GET request to the server, storing the command and executing it, and POSTing the output.
+- The client should have a loop sending a GET request to the server, storing the command and executing it, and POSTing the output
