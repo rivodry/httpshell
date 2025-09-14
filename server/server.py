@@ -22,7 +22,8 @@ class ServerHandler(BaseHTTPRequestHandler):
         if "info" in data:
             print("Connection recevied!")
             print(data["info"][0])
-if __name__== '__main__':
+
+def main():
     ser = HTTPServer((IP,PORT),ServerHandler)
     try:
         print("Server started")
@@ -31,3 +32,6 @@ if __name__== '__main__':
     except:
         print("Stopping")
         ser.server_close()
+if __name__== '__main__':
+    main()
+   
